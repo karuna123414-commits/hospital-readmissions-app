@@ -112,6 +112,39 @@ ax.set_ylabel("True Positive Rate")
 ax.legend()
 st.pyplot(fig)
 
+st.header("Reports (Placeholder)")
+
+# Placeholder message
+st.info("This section will generate reports in the final version. For now, here are placeholders.")
+
+# PDF placeholder button
+if st.button("Generate PDF Report"):
+    st.warning("PDF report generation coming soon!")
+
+# CSV placeholder (with real results if available, else sample)
+try:
+    df_for_report = results.copy()   # use your real results DataFrame
+except NameError:
+    # if results is not defined yet, create a sample
+    df_for_report = pd.DataFrame({
+        "Model": ["Random Forest"],
+        "Accuracy": [0.87],
+        "Precision": [0.80],
+        "Recall": [0.85],
+        "F1 Score": [0.82]
+    })
+
+csv_bytes = df_for_report.to_csv(index=False).encode("utf-8")
+
+st.download_button(
+    label="Download Report (CSV)",
+    data=csv_bytes,
+    file_name="report.csv",
+    mime="text/csv",
+    help="Placeholder download with sample metrics."
+)
+
+
 # ---------------------------
 # Interactive Prediction
 # ---------------------------
@@ -141,3 +174,4 @@ st.sidebar.write("""
 - **Outputs:** Confusion Matrix, ROC Curve, metrics table  
 - Use the input fields to simulate a new patient record.  
 """)
+
